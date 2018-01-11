@@ -64,8 +64,8 @@ class Rust < Formula
       sha256 "1eac1e406efed2472cbeac6316677c1ada90acc77eb7b3fee8a9573c23b02a5f"
     elsif OS.linux?
       # From: https://github.com/rust-lang/rust/blob/#{version}/src/stage0.txt
-      url "https://static.rust-lang.org/dist/2017-11-12/cargo-0.23.0-x86_64-apple-darwin.tar.gz"
-      sha256 "0540d18adbe45d922d54a581c3766abacafddf08a059abf101cd4a528e45fe74"
+      url "https://dev-static.rust-lang.org/dist/2017-11-20/cargo-0.23.0-x86_64-unknown-linux-gnu.tar.xz"
+      sha256 "47935ec10e3ee22ba27b9df571e34c37702e5b1ec245701483c29375b4f0b7fc"
     end
   end
 
