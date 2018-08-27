@@ -23,6 +23,10 @@ class Pidgin < Formula
   depends_on "libidn"
   depends_on "libotr"
   depends_on "pango"
+  unless OS.mac?
+    depends_on "ncurses"
+    depends_on "perl"
+  end
 
   # Finch has an equal port called purple-otr but it is a NIGHTMARE to compile
   # If you want to fix this and create a PR on Homebrew please do so.
@@ -46,10 +50,16 @@ class Pidgin < Formula
       --disable-meanwhile
       --disable-vv
       --enable-gnutls=yes
-      --with-tclconfig=#{MacOS.sdk_path}/System/Library/Frameworks/Tcl.framework
-      --with-tkconfig=#{MacOS.sdk_path}/System/Library/Frameworks/Tk.framework
       --without-x
     ]
+
+    if OS.mac?
+      args << "--with-tclconfig=#{MacOS.sdk_path}/System/Library/Frameworks/Tcl.framework"
+      args << "--with-tkconfig=#{MacOS.sdk_path}/System/Library/Frameworks/Tk.framework"
+    else
+      args << "--disable-tcl"
+      args << "--enable-consoleui"
+    end
 
     system "./configure", *args
     system "make", "install"
