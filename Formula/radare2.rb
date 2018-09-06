@@ -68,6 +68,7 @@ class Radare2 < Formula
   depends_on "lua"
   depends_on "openssl"
   depends_on "yara"
+  depends_on "perl" unless OS.mac?
 
   def install
     # Build Radare2 before bindings, otherwise compile = nope.
