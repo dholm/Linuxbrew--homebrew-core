@@ -24,13 +24,18 @@ class Hwloc < Formula
   depends_on "cairo" => :optional
 
   def install
+    args = %W[
+      --disable-debug
+      --disable-dependency-tracking
+      --enable-shared
+      --enable-static
+      --prefix=#{prefix}
+      --without-x
+    ]
+    args << "--disable-cairo" if build.without? "cairo"
+
     system "./autogen.sh" if build.head?
-    system "./configure", "--disable-debug",
-                          "--disable-dependency-tracking",
-                          "--enable-shared",
-                          "--enable-static",
-                          "--prefix=#{prefix}",
-                          "--without-x"
+    system "./configure", *args
     system "make", "install"
 
     pkgshare.install "tests"
